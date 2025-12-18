@@ -674,6 +674,85 @@
         color: var(--neon-pink);
       }
 
+      /* --- Project Image Gallery --- */
+      .project-gallery {
+        width: 100%;
+        height: 250px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      .gallery-container {
+        display: flex;
+        height: 100%;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item {
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .gallery-controls {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+      }
+
+      .gallery-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: 0.3s;
+        border: 1px solid var(--neon-cyan);
+      }
+
+      .gallery-dot.active {
+        background: var(--neon-pink);
+        box-shadow: 0 0 10px var(--neon-pink);
+      }
+
+      .gallery-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 243, 255, 0.3);
+        border: none;
+        color: var(--neon-cyan);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 5px 10px;
+        transition: 0.3s;
+        z-index: 10;
+      }
+
+      .gallery-arrow:hover {
+        background: rgba(0, 243, 255, 0.6);
+        color: var(--neon-pink);
+      }
+
+      .gallery-arrow.prev {
+        left: 5px;
+      }
+
+      .gallery-arrow.next {
+        right: 5px;
+      }
+
       /* --- Skills Section --- */
       .skills-wrapper {
         display: flex;
@@ -1355,6 +1434,25 @@
           <!-- Project 1: Foodeen -->
           <div class="project-card scroll-animate">
             <h3 class="project-title">Foodeen</h3>
+            
+            <!-- Image Gallery -->
+            <div class="project-gallery">
+              <div class="gallery-container" id="foodeen-gallery">
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=600&h=400&fit=crop');"></div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop');"></div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop');"></div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1585238341710-4913d3a3a48f?w=600&h=400&fit=crop');"></div>
+              </div>
+              <button class="gallery-arrow prev" onclick="scrollGallery('foodeen-gallery', -1)">❮</button>
+              <button class="gallery-arrow next" onclick="scrollGallery('foodeen-gallery', 1)">❯</button>
+              <div class="gallery-controls">
+                <div class="gallery-dot active" onclick="goToGallery('foodeen-gallery', 0)"></div>
+                <div class="gallery-dot" onclick="goToGallery('foodeen-gallery', 1)"></div>
+                <div class="gallery-dot" onclick="goToGallery('foodeen-gallery', 2)"></div>
+                <div class="gallery-dot" onclick="goToGallery('foodeen-gallery', 3)"></div>
+              </div>
+            </div>
+
             <p>
               A food donation ecosystem reducing waste by connecting restaurants
               to NGOs.
@@ -1734,6 +1832,47 @@
 
       document.querySelectorAll(".scroll-animate").forEach((el) => {
         observer.observe(el);
+      });
+
+      // --- Gallery Navigation ---
+      function scrollGallery(galleryId, direction) {
+        const gallery = document.getElementById(galleryId);
+        const items = gallery.querySelectorAll('.gallery-item').length;
+        const currentIndex = Math.round(gallery.parentElement.scrollLeft / gallery.parentElement.offsetWidth);
+        const newIndex = (currentIndex + direction + items) % items;
+        goToGallery(galleryId, newIndex);
+      }
+
+      function goToGallery(galleryId, index) {
+        const gallery = document.getElementById(galleryId);
+        const container = gallery.parentElement;
+        const itemWidth = container.offsetWidth;
+        container.scrollLeft = index * itemWidth;
+
+        // Update dots
+        const dots = container.querySelectorAll('.gallery-dot');
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      // Update gallery dots on scroll
+      document.querySelectorAll('.project-gallery').forEach((gallery) => {
+        gallery.addEventListener('scroll', () => {
+          const index = Math.round(gallery.scrollLeft / gallery.offsetWidth);
+          const dots = gallery.querySelectorAll('.gallery-dot');
+          dots.forEach((dot, i) => {
+            if (i === index) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        });
       });
     </script>
   </body>
