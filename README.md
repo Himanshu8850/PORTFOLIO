@@ -6,7 +6,7 @@ A modern, responsive cyberpunk-themed portfolio website showcasing projects, ski
 
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
 - **Cyberpunk Aesthetic**: Neon colors, glitch effects, and gaming-inspired design
-- **Interactive Elements**: 
+- **Interactive Elements**:
   - Animated custom cursor with glow effects
   - Smooth scroll animations
   - Mobile sidebar navigation
@@ -22,12 +22,14 @@ Visit the deployed portfolio: [Your Render URL]
 ## Deployment on Render
 
 ### Prerequisites
+
 - GitHub account
 - Render account (https://render.com)
 
 ### Steps to Deploy
 
 1. **Initialize Git Repository** (if not already done)
+
    ```bash
    cd portfolio
    git init
@@ -36,6 +38,7 @@ Visit the deployed portfolio: [Your Render URL]
    ```
 
 2. **Push to GitHub**
+
    - Create a new repository on GitHub
    - Push your code:
      ```bash
@@ -45,6 +48,7 @@ Visit the deployed portfolio: [Your Render URL]
      ```
 
 3. **Deploy on Render**
+
    - Go to https://render.com
    - Sign in with GitHub
    - Click "New +" → "Web Service"
@@ -107,6 +111,7 @@ MIT License - feel free to use this portfolio template for your own projects!
 ## Author
 
 Himanshu Choudhary
+
 - Email: 1130himanshu@gmail.com
 - GitHub: https://github.com/Himanshu8850
 - LinkedIn: https://www.linkedin.com/in/himanshu-choudhary-178618245/

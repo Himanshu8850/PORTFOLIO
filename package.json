@@ -10,7 +10,10 @@
   "dependencies": {
     "express": "^4.18.2"
   },
-  "keywords": ["portfolio", "cyberpunk"],
+  "keywords": [
+    "portfolio",
+    "cyberpunk"
+  ],
   "author": "Himanshu Choudhary",
   "license": "MIT",
   "engines": {
